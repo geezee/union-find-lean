@@ -767,15 +767,3 @@ def UnionFind.from_mut {C α τ} [BEq τ] [LawfulBEq τ] (ctx: C τ τ) [FLike C
   match list with
   | List.nil => @UnionFind.trivial C α τ _ _ ctx _
   | List.cons (a,b) eqs => (UnionFind.from_mut ctx eqs).union_mut a b
-
-theorem UnionFind.from_iff_from_mut {C α τ} [BEq τ] [LawfulBEq τ] (c: C τ τ) [FLike C α τ τ c] (list: List (τ × τ))
-  : ∀ a b, (@UnionFind.from C α τ _ _ c _ list ⊢ a ≃ b) ↔ (@UnionFind.from_mut C α τ _ _ c _ list ⊢ a ≃ b)
-  := by
-    intros a b
-    induction list
-    case nil =>
-      simp [UnionFind.from, UnionFind.from_mut]
-    case cons xy tl ih =>
-      simp [UnionFind.from, UnionFind.from_mut]
-      apply Iff.trans _ $ (from_mut c tl).union_iff_union_mut xy.fst xy.snd a b
-      sorry
