@@ -155,7 +155,7 @@ theorem UnionFind.find_root_is_id {C α} [BEq τ] (uf: UnionFind C α τ) (x: τ
   := by
     intros hyp
     unfold find
-      simp only [hyp, reduceIte]
+    simp only [hyp, reduceIte]
 
 theorem UnionFind.find_ans_is_root {C α} [BEq τ] (uf: UnionFind C α τ)
   : ∀ x, uf.is_root (uf.find x)
